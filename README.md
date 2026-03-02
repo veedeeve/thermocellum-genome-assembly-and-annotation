@@ -12,7 +12,7 @@ The pipeline includes:
 8. Functional Refinement
 
 ## Objective:
-The objective of this project was to perform a complete de novo genome assembly and functional annotation of Clostridium thermocellum DSM1313 using short-read sequencing data.
+The objective of this project was to perform a complete de novo genome assembly and functional annotation of Clostridium thermocellum using short-read sequencing data.
 
 ## Key Findings:
 
