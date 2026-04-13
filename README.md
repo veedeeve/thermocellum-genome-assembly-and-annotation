@@ -51,16 +51,16 @@ thermo-genome-assembly-annotation/
 
 ## Results 
 
-**Assembly Statistics (Spades_Careful):**
+**Assembly Statistics (Spades_Default vs Spades_Careful):**
 
 <p align="center">
   <img src="results/figures/quast.png" width="600">
 </p>  
 
-- N50:  `40,549 bp`  
-- Total assembly length: `3,300,239`  
-- Genome fraction: `85.727%`  
-- Misassemblies: `68`  
+- N50:  `36,968 bp`  
+- Total assembly length: `3,453,625`  
+- Genome fraction: `85.687%`  
+- Misassemblies: `75`  
 
 **Annotation (Prokka):**
 - Predicted coding sequences (CDS): `2981`
@@ -88,7 +88,12 @@ thermo-genome-assembly-annotation/
 ---
 
 ## Discussion
-This project implemented an end-to-end de novo genome assembly and annotation pipeline for Clostridium thermocellum using short-read sequencing data. After quality control and trimming, SPAdes generated a draft genome assembly totaling 3.49 Mb across 286 contigs. QUAST analysis indicated high genome fraction relative to the reference, consistent with a draft-quality bacterial assembly. Fragmentation likely reflects short-read limitations in repetitive regions.
+This project implemented an end-to-end de novo genome assembly and annotation pipeline for Clostridium thermocellum using short-read sequencing data. 
+
+### Assembly
+The genome assembly results demonstrated that both SPAdes default and SPAdes careful pipeline produced comparable assemblies. The genome fraction was nearly identical, indicating that both approaches were able to recover a similar proportion of the reference genome. However, the SPAdes careful assembly resulted in fewer contigs (100 vs 104) and higher NGA50 value (36,968 bp vs 36,572 bp), suggesting improved continuity and longer assembled regions. SPAdes careful assembly was selected to conduct annotation due to its improved contiguity while maintaining comparabe accuracy.
+
+### Annotation
 
 Prokka predicted 2,981 coding sequences along with tRNA and rRNA genes, aligning with expected bacterial genome architecture. Functional annotation using BLASTP against the curated Swiss-Prot database, followed by stringent filtering, identified 726 high-confidence protein matches (24.35% of CDS). This conservative annotation rate reflects the limited but high-confidence nature of Swiss-Prot and prioritizes reliability over coverage.
 
