@@ -42,7 +42,7 @@ The pipeline includes:
    - 55 tRNAs
    - 4 rRNAs
    - 1 tmRNA  
-- 726 high-confidence matches (24.35%) in BLASTP against Swiss-Prot
+- 738 high-confidence matches (24.77%) in BLASTP against Swiss-Prot
 
 ---
 
