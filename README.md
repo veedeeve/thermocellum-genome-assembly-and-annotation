@@ -103,7 +103,7 @@ thermo-genome-assembly-annotation/
 
 ### 1. Clone repository
 ```bash
-git clone https://github.com/veedeeve/thermocellum_genome_assembly_annotation.git
+git clone https://github.com/veedeeve/thermocellum-genome-assembly-and-annotation.git
 cd thermocellum_genome_assembly_annotation
 ```
 
