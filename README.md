@@ -1,7 +1,29 @@
-# Thermocellum Genome Assembly & Annotation
+# *C. thermocellum* Genome Assembly & Annotation
+
+A de novo genome assembly and annotation workflow for *Clostridium thermocellum*, an anaerobic bacterium of interest for lignocellulosic biomass degradation and biofuel production.
+
+---
 
 ## Project Overview
-This project demonstrates a complete workflow for **de novo genome assembly and annotation** of *Clostridium thermocellum* using publicly available sequencing data. 
+
+Contains bash scripts for de novo genome assembly and structural/functional annotation of *Clostridium thermocellum*. The pipeline processes raw sequencing reads through QC, assembly, polishing, and annotation.
+
+**Note:** This workflow is currently implemented as modular bash scripts. Migration to Nextflow is planned 
+
+---
+
+## Strain Information
+ 
+| Field | Details |
+|---|---|
+| Organism | *Clostridium thermocellum* |
+| Strain | *LL1798* |
+| Reference Genome | *NCBI Accession: `GCA_000015865`* |
+| Sequencing Platform | *Illumina NextSeq 500* |
+| Read Type | *Paired (500 bp pair-end)* |
+| NCBI SRA | *SRR15202685* |
+ 
+---
 
 The pipeline includes: 
 1. SRA retrieval (SRR15202685)
@@ -12,13 +34,6 @@ The pipeline includes:
 6. Structural Annotation (Prokka)
 7. Homology-Based Functional Annotation (BLASTP vs Swiss-Prot)
 8. Functional Refinement
-
----
-
-## Objective
-The objective of this project was to perform a complete de novo genome assembly and functional annotation of Clostridium thermocellum using short-read sequencing data.
-
----
 
 ## Key Findings
 - A 3.49 Mb draft genome was assembled across 286 contigs, consistent with expected genome size for C. thermocellum.
@@ -34,15 +49,23 @@ The objective of this project was to perform a complete de novo genome assembly 
 ## File Structure
 ```
 thermo-genome-assembly-annotation/
-├── data/
-├── results/
-│   ├── figures/
-│   ├── docs/
+├── raw_data/
+├── metadata/
+├── analysis/
+│   ├── fastqc_raw/
+│   ├── fastqc_trimmed/
+│   ├── spades_default/
+│   ├── spades_careful/
+│   ├── reference/
+│   ├── quast/
+│   ├── prokka_annotation/
+│   ├── annot_swissprot/
 ├── scripts/
-│   ├── 01-genome-assembly-pipeline.sh
-│   ├── 02-gene-annotation
-├── doc/
-│   ├── methodology.md
+│   ├── config.sh
+│   ├── 01-genome-assembly.sh
+│   ├── 02-gene-annotation.py
+├── logs/
+├── docs/
 ├── environment.yml
 └── README.md
 ```
@@ -51,21 +74,18 @@ thermo-genome-assembly-annotation/
 
 ## Results 
 
-**Assembly Statistics (Spades_Default vs Spades_Careful):**
-
-<p align="center">
-  <img src="results/figures/quast.png" width="600">
-</p>  
+**Assembly Statistics (Spades_Careful):**
 
 - N50:  `36,968 bp`  
 - Total assembly length: `3,453,625`  
 - Genome fraction: `85.687%`  
 - Misassemblies: `75`  
 
-**Annotation (Prokka):**
-- Predicted coding sequences (CDS): `2981`
-- rRNAs and tRNAs detected: `4 rRNA, 55 tRNA`
-- Functional annotations via SwissProt: `~24%`
+**Annotation (Prokka & SwissProt):**
+- Predicted coding sequences (CDS): `2980`
+- rRNAs and tRNAs detected: `4 rRNA, 52 tRNA`
+- Annotated coding sequence: `738`
+- Functional annotations via SwissProt: `~24.77%`
 
 **Top SwissProt Protein Hits**
 
@@ -79,11 +99,26 @@ thermo-genome-assembly-annotation/
 
 ---
 
-## Workflow
+## Usage
 
-<p align="center">
-  <img src="results/figures/genome-assembly-annotation-workflow.drawio.png" width="600">
-</p>  
+Install mamba following: [Github: miniforge][https://github.com/conda-forge/miniforge]
+
+### Setup Environment
+```bash
+micromamba create -f environment.yml
+micromamba activate assembly_annotation_env
+```
+
+### If needed, update paths of the config.sh 
+```bash
+nano scripts/config.sh
+```
+
+### Run script
+```bash
+bash scripts/01-genome-assembly-annotation.sh
+python scripts/02-gene-annotation.py --blast_file analysis/blastp_results.out 
+```
 
 ---
 
@@ -95,6 +130,6 @@ The genome assembly results demonstrated that both SPAdes default and SPAdes car
 
 ### Annotation
 
-Prokka predicted 2,981 coding sequences along with tRNA and rRNA genes, aligning with expected bacterial genome architecture. Functional annotation using BLASTP against the curated Swiss-Prot database, followed by stringent filtering, identified 726 high-confidence protein matches (24.35% of CDS). This conservative annotation rate reflects the limited but high-confidence nature of Swiss-Prot and prioritizes reliability over coverage.
+Prokka predicted 2,980 coding sequences along with tRNA and rRNA genes, aligning with expected bacterial genome architecture. Functional annotation using BLASTP against the curated Swiss-Prot database, followed by stringent filtering, identified 726 high-confidence protein matches (24% of CDS). This conservative annotation rate reflects the limited but high-confidence nature of Swiss-Prot and prioritizes reliability over coverage.
 
 Overall, the workflow demonstrates a reproducible genome assembly and functional annotation strategy, producing a biologically consistent draft genome suitable for downstream comparative and metabolic analysis.
