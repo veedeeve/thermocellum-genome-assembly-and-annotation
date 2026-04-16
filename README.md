@@ -141,6 +141,6 @@ The genome assembly results demonstrated that both SPAdes default and SPAdes car
 
 ### Annotation
 
-Prokka predicted 2,980 coding sequences along with tRNA and rRNA genes, aligning with expected bacterial genome architecture. Functional annotation using BLASTP against the curated Swiss-Prot database, followed by stringent filtering, identified 726 high-confidence protein matches (24% of CDS). This conservative annotation rate reflects the limited but high-confidence nature of Swiss-Prot and prioritizes reliability over coverage.
+Prokka predicted 2,980 coding sequences along with tRNA and rRNA genes, aligning with expected bacterial genome architecture. Functional annotation using BLASTP against the curated Swiss-Prot database, followed by stringent filtering, identified 738 high-confidence protein matches (24% of CDS). This conservative annotation rate reflects the limited but high-confidence nature of Swiss-Prot and prioritizes reliability over coverage.
 
 Overall, the workflow demonstrates a reproducible genome assembly and functional annotation strategy, producing a biologically consistent draft genome suitable for downstream comparative and metabolic analysis.
