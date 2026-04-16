@@ -1,0 +1,13 @@
+name: assembly_annotation_env
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - fastqc
+  - prokka
+  - python=3.11
+  - quast
+  - spades
+  - trimmomatic
+
+prefix: "/Users/vydang/micromamba/envs/assembly_annotation_env"
