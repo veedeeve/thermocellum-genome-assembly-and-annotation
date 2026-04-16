@@ -101,23 +101,34 @@ thermo-genome-assembly-annotation/
 
 ## Usage
 
-Install mamba following: [Github: miniforge][https://github.com/conda-forge/miniforge]
+### 1. Clone repository
+```bash
+git clone https://github.com/veedeevee/thermocellum_genome_assembly_annotation.git
+cd thermocellum_genome_assembly_annotation
+```
 
-### Setup Environment
+### 2. Install Micromamba
+Install mamba following: [Github: miniforge](https://github.com/conda-forge/miniforge)
+
+### 3. Setup Environment
 ```bash
 micromamba create -f environment.yml
 micromamba activate assembly_annotation_env
 ```
 
-### If needed, update paths of the config.sh 
+### 4. Configure Paths
 ```bash
 nano scripts/config.sh
 ```
 
-### Run script
+### 5. Run Pipeline
 ```bash
 bash scripts/01-genome-assembly-annotation.sh
-python scripts/02-gene-annotation.py --blast_file analysis/blastp_results.out 
+```
+
+### 5. Run Downstream Analysus
+```bash
+python scripts/02-gene-annotation.py --blast_file analysis/blastp_results.out
 ```
 
 ---
